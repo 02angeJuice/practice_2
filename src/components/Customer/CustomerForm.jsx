@@ -7,20 +7,48 @@ import {
   editCustomer,
   setEditMode,
 } from '../../store/slices/customerSlice'
-import Joi from 'joi'
-import { joiResolver } from '@hookform/resolvers/joi'
+
+import * as yup from 'yup'
+import { yupResolver } from '@hookform/resolvers/yup'
 import { nextId } from '../../utils'
 
-const schema = Joi.object({
-  cust_id: Joi.string().required(),
-  cust_name: Joi.string().required(),
-  cust_address: Joi.string().required(),
-  cust_postcode: Joi.number().required(),
-  cust_phone: Joi.number().required(),
-  cust_fax: Joi.number().required(),
-  cust_email: Joi.string()
-    .email({ tlds: { allow: false } })
-    .required(),
+// const schema = Joi.object({
+//   cust_id: Joi.string().required(),
+//   cust_name: Joi.string().required(),
+//   cust_address: Joi.string().required(),
+//   cust_postcode: Joi.number().required(),
+//   cust_phone: Joi.number().required(),
+//   cust_fax: Joi.number().required(),
+//   cust_email: Joi.string()
+//     .email({ tlds: { allow: false } })
+//     .required(),
+// })
+
+const schema = yup.object().shape({
+  cust_id: yup.string().required(),
+  cust_name: yup.string().required('กรุณาใส่ชื่อ'),
+  cust_address: yup
+    .string()
+    .required('กรุณาใส่ที่อยู่ลูกค้า')
+    .min(10, 'โปรดใส่รายละเอียดเพิ่มเติม'),
+  cust_postcode: yup
+    .string()
+    .required('กรุณาใส่รหัสไปรษณีย์')
+    .matches(/\d+/, 'กรุณาใส่รหัสไปรษณีย์ ด้วยหมายเลข'),
+  cust_phone: yup
+    .string()
+    .required('กรุณาใส่เบอร์โทรศัพท์')
+    .matches(/\d+/, 'กรุณาใส่เบอร์โทรศัพท์ ด้วยหมายเลข')
+    .min(10, 'เบอร์โทรศัพท์ไม่ถูกต้อง')
+    .max(12, 'เบอร์โทรศัพท์ไม่ถูกต้อง'),
+  cust_fax: yup
+    .string()
+    .required('กรุณาใส่เบอร์แฟกซ์')
+    .matches(/\d+/, 'กรุณาใส่เบอร์แฟกซ์ ด้วยหมายเลข'),
+  cust_email: yup
+    .string()
+    .email('โปรดใส่อีเมลให้ถูกต้อง')
+    .required('กรุณาใส่อีเมล'),
 })
 
 const CustomerForm = () => {
@@ -33,7 +61,7 @@ const CustomerForm = () => {
     reset,
     setValue,
     formState: { errors },
-  } = useForm({ resolver: joiResolver(schema), mode: 'onChange' })
+  } = useForm({ resolver: yupResolver(schema), mode: 'onChange' })
 
   useEffect(() => {
     if (customer.customers.length !== 0 && Object.keys(errors).length === 0) {
@@ -89,7 +117,6 @@ const CustomerForm = () => {
               className="w-full h-10 border rounded-md px-3 !outline-none"
               type="text"
               {...register('cust_id')}
-              id="cust_id"
               disabled
             />
             {errors.cust_id && (
@@ -102,7 +129,6 @@ const CustomerForm = () => {
               className="w-full h-10 border rounded-md px-3 !outline-none"
               type="text"
               {...register('cust_name')}
-              id="cust_name"
             />
             {errors.cust_name && (
               <small className="text-red-400">{errors.cust_name.message}</small>
@@ -117,7 +143,6 @@ const CustomerForm = () => {
               className="w-full h-20 border rounded-md px-3 !outline-none"
               type="text"
               {...register('cust_address')}
-              id="cust_address"
             />
             {errors.cust_address && (
               <small className="text-red-400">
@@ -134,7 +159,6 @@ const CustomerForm = () => {
               className="w-full h-10 border rounded-md px-3 !outline-none"
               type="text"
               {...register('cust_postcode')}
-              id="cust_postcode"
             />
             {errors.cust_postcode && (
               <small className="text-red-400">
@@ -148,7 +172,6 @@ const CustomerForm = () => {
               className="w-full h-10 border rounded-md px-3 !outline-none"
               type="text"
               {...register('cust_phone')}
-              id="cust_phone"
             />
             {errors.cust_phone && (
               <small className="text-red-400">
@@ -165,7 +188,6 @@ const CustomerForm = () => {
               className="w-full h-10 border rounded-md px-3 !outline-none"
               type="text"
               {...register('cust_fax')}
-              id="cust_fax"
             />
             {errors.cust_fax && (
               <small className="text-red-400">{errors.cust_fax.message}</small>
@@ -177,7 +199,6 @@ const CustomerForm = () => {
               className="w-full h-10 border rounded-md px-3 !outline-none"
               type="email"
               {...register('cust_email')}
-              id="cust_email"
             />
             {errors.cust_email && (
               <small className="text-red-400">
