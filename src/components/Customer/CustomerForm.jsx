@@ -15,9 +15,9 @@ const schema = Joi.object({
   cust_id: Joi.string().required(),
   cust_name: Joi.string().required(),
   cust_address: Joi.string().required(),
-  cust_postcode: Joi.string().required(),
+  cust_postcode: Joi.number().required(),
   cust_phone: Joi.number().required(),
-  cust_fax: Joi.string().required(),
+  cust_fax: Joi.number().required(),
   cust_email: Joi.string()
     .email({ tlds: { allow: false } })
     .required(),
@@ -33,7 +33,7 @@ const CustomerForm = () => {
     reset,
     setValue,
     formState: { errors },
-  } = useForm({ resolver: joiResolver(schema) })
+  } = useForm({ resolver: joiResolver(schema), mode: 'onChange' })
 
   useEffect(() => {
     if (customer.customers.length !== 0 && Object.keys(errors).length === 0) {
