@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+th,
+td {
+  padding: 5px 8px;
+}
+
+.button-shadow {
+  transition: 0.2s;
+}
+
+div.button-shadow {
+  padding-top: 5px;
+}
+
+.button-shadow:hover {
+  box-shadow: 5px 5px gray;
+  transition: 0.3s;
+  transform: translate(-2px, -2px);
+  color: white;
+}
