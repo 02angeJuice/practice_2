@@ -142,21 +142,21 @@ const CustomerForm = () => {
 
           <table
             ref={componentRef}
-            className="table table-auto w-full  text-black mt-10 mb-5 ">
-            <thead>
-              <tr>
-                <td>รหัสลูกค้า</td>
-                <td>ชื่อลูกค้า</td>
-                <td>ที่อยู่ลูกค้า</td>
-                <td>รหัสไปรษณีย์</td>
-                <td>เบอร์โทรศัพท์</td>
-                <td>เบอร์แฟกซ์</td>
-                <td>อีเมล</td>
+            className="table table-auto w-full px-5 text-black mt-10 mb-5 ">
+            <thead className="border border-black">
+              <tr className="border border-black">
+                <td className="border border-black">รหัสลูกค้า</td>
+                <td className="border border-black">ชื่อลูกค้า</td>
+                <td className="border border-black">ที่อยู่ลูกค้า</td>
+                <td className="border border-black">รหัสไปรษณีย์</td>
+                <td className="border border-black">เบอร์โทรศัพท์</td>
+                <td className="border border-black">เบอร์แฟกซ์</td>
+                <td className="border border-black">อีเมล</td>
               </tr>
             </thead>
             <tbody>
-              {customer?.customers.map((item, index) => (
-                <tr key={index}>
+              {customer?.customers.map((item, idx) => (
+                <tr className="border border-gray-100" key={idx}>
                   <td>{item.cust_id}</td>
                   <td>{item.cust_name}</td>
                   <td>{item.cust_address}</td>

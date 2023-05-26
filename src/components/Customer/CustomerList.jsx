@@ -21,8 +21,8 @@ const CustomerList = () => {
             </tr>
           </thead>
           <tbody>
-            {customer?.customers.map((item, index) => {
-              return <Item key={index} item={item} />
+            {customer?.customers.map((item, idx) => {
+              return <Item key={idx} item={item} />
             })}
           </tbody>
         </table>

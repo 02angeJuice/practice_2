@@ -1,6 +1,4 @@
 import Customer from './components/Customer/Customer'
-import CustmerPrint from './components/Customer/CustomerPrint'
-
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Root from './routes/root.jsx'
 
@@ -29,11 +27,8 @@ function App() {
       <Router>
         <Routes>
           <Route path="/customer" element={<Customer />} />
-          <Route path="/customer/print" element={<CustmerPrint />} />
         </Routes>
       </Router>
-
-      <div className="sm:w-5/5 md:w-5/5 lg:w-5/5 xl:w-4/5 m-auto mt-10 p-2"></div>
     </>
   )
 }
