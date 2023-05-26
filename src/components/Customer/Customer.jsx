@@ -1,3 +1,4 @@
+import React from 'react'
 import CustomerForm from './CustomerForm'
 import CustomerList from './CustomerList'
 

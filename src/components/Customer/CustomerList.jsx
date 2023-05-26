@@ -7,24 +7,26 @@ const CustomerList = () => {
 
   return (
     <>
-      <table className="table table-auto w-full bg-neutral-800 text-white mt-10 mb-5 rounded-md shadow-2xl">
-        <thead>
-          <tr>
-            <td></td>
-            <td>ชื่อลูกค้า</td>
-            <td>ที่อยู่ลูกค้า</td>
-            <td>รหัสไปรษณีย์</td>
-            <td>เบอร์โทรศัพท์</td>
-            <td>เบอร์แฟกซ์</td>
-            <td>อีเมล</td>
-          </tr>
-        </thead>
-        <tbody>
-          {customer?.customers.map((item, index) => {
-            return <Item key={index} item={item} />
-          })}
-        </tbody>
-      </table>
+      {!customer.print && (
+        <table className="table table-auto w-full bg-neutral-800 text-white mt-10 mb-5 rounded-md shadow-2xl">
+          <thead>
+            <tr>
+              <td>รหัส</td>
+              <td>ชื่อลูกค้า</td>
+              <td>ที่อยู่ลูกค้า</td>
+              <td>รหัสไปรษณีย์</td>
+              <td>เบอร์โทรศัพท์</td>
+              <td>เบอร์แฟกซ์</td>
+              <td>อีเมล</td>
+            </tr>
+          </thead>
+          <tbody>
+            {customer?.customers.map((item, index) => {
+              return <Item key={index} item={item} />
+            })}
+          </tbody>
+        </table>
+      )}
     </>
   )
 }

@@ -4,6 +4,7 @@ const initialState = {
   customers: [],
   selecting: {},
   editmode: false,
+  printer: false,
 }
 
 export const customerSlice = createSlice({
@@ -40,6 +41,9 @@ export const customerSlice = createSlice({
       state.selecting = action.payload
       state.editmode = true
     },
+    triggerPrint: (state, action) => {
+      state.printer = action.payload
+    },
   },
 })
 
@@ -49,6 +53,7 @@ export const {
   editCustomer,
   selectCustomer,
   setEditMode,
+  triggerPrint,
 } = customerSlice.actions
 
 export default customerSlice.reducer
