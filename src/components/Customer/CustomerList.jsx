@@ -7,7 +7,7 @@ const CustomerList = () => {
 
   return (
     <>
-      {!customer.print && (
+      {!customer.printer && (
         <table className="table table-auto w-full bg-neutral-800 text-white mt-10 mb-5 rounded-md shadow-2xl">
           <thead>
             <tr>
