@@ -25,7 +25,10 @@ export const customerSlice = createSlice({
     editCustomer: (state, action) => {
       state.customers = state.customers.map((customer) => {
         if (customer.cust_id === action.payload.cust_id) {
-          return { ...customer, ...action.payload }
+          return {
+            ...customer,
+            ...action.payload,
+          }
         }
         return customer
       })

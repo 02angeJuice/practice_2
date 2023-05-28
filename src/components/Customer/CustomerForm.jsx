@@ -64,8 +64,7 @@ const CustomerForm = () => {
     reset,
     setValue,
     formState: { errors },
-  } = useForm({ mode: 'onChange' })
-  // resolver: yupResolver(schema)
+  } = useForm({ resolver: yupResolver(schema), mode: 'onChange' })
 
   useEffect(() => {
     if (customer.customers.length !== 0 && Object.keys(errors).length === 0) {
