@@ -15,18 +15,6 @@ import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { nextId } from '../../utils'
 
-// const schema = Joi.object({
-//   cust_id: Joi.string().required(),
-//   cust_name: Joi.string().required(),
-//   cust_address: Joi.string().required(),
-//   cust_postcode: Joi.number().required(),
-//   cust_phone: Joi.number().required(),
-//   cust_fax: Joi.number().required(),
-//   cust_email: Joi.string()
-//     .email({ tlds: { allow: false } })
-//     .required(),
-// })
-
 const schema = yup.object().shape({
   cust_id: yup.string().required(),
   cust_name: yup.string().required('กรุณาใส่ชื่อ'),
@@ -58,6 +46,8 @@ const CustomerForm = () => {
   const { customer } = useSelector((state) => ({ ...state }))
   const dispatch = useDispatch()
 
+  const componentRef = useRef()
+
   const {
     register,
     handleSubmit,
@@ -85,15 +75,12 @@ const CustomerForm = () => {
   const handleDelete = () => {
     confirm('confirm delete...!!!') &&
       dispatch(deleteCustomer(customer.selecting))
-    reset()
   }
 
   const handleBack = () => {
     dispatch(setEditMode(false))
     reset()
   }
-
-  const componentRef = useRef()
 
   const submitForm = async (formData) => {
     if (customer.editmode) {
@@ -117,9 +104,7 @@ const CustomerForm = () => {
           <div>
             <ReactToPrint
               trigger={() => (
-                <div
-                  className="button-shadow mt-5 m-auto w-20 text-center h-10 border border-black bg-gray-600 hover:bg-gray-800 rounded-md cursor-pointer text-white"
-                  onClick={() => dispatch(triggerPrint(true))}>
+                <div className="button-shadow mt-5 m-auto w-20 text-center h-10 border border-black bg-gray-600 hover:bg-gray-800 rounded-md cursor-pointer text-white">
                   ปริ้นท์
                 </div>
               )}
