@@ -9,7 +9,7 @@ import {
   triggerPrint,
 } from '../../store/slices/customerSlice'
 
-import ReactToPrint, { useReactToPrint } from 'react-to-print'
+import ReactToPrint from 'react-to-print'
 
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -93,18 +93,7 @@ const CustomerForm = () => {
     reset()
   }
 
-  // const handlePrint = useReactToPrint({
-  //   content: () => componentRef.current,
-  //   documentTitle: 'customer-data',
-  //   onAfterPrint: () => alert('dsdsd'),
-  // })
-
   const componentRef = useRef()
-  const handlePrint = useReactToPrint({
-    content: () => componentRef.current,
-    documentTitle: 'customer-data',
-    onAfterPrint: () => dispatch(triggerPrint(false)),
-  })
 
   const submitForm = async (formData) => {
     if (customer.editmode) {
